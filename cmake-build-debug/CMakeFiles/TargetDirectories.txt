@@ -1,0 +1,3 @@
+D:/coding/C++ Projects/Tema LFA/cmake-build-debug/CMakeFiles/Tema_LFA.dir
+D:/coding/C++ Projects/Tema LFA/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/coding/C++ Projects/Tema LFA/cmake-build-debug/CMakeFiles/rebuild_cache.dir
