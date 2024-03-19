@@ -11,11 +11,12 @@ bool LambdaNFA::solve(std::string&word){
 
 //    std::set<State*>visited_states;
     std::unordered_map<State*, size_t>index_to_state; // mark the index in the word in a certain state (for lambda cycles)
-    index_to_state[this->m_initial_state] = 0;
 
     while (!states_to_visit.empty()) {
         State* current_state = states_to_visit.top().first; // we extract the current state from the stack
         size_t current_index = states_to_visit.top().second;
+
+        index_to_state[current_state] = current_index;
 
         states_to_visit.pop();
 
@@ -23,7 +24,7 @@ bool LambdaNFA::solve(std::string&word){
         if (current_index == word.length() && current_state->is_final)
             return true;
 
-        if (current_index < word.length()) {
+        if (current_index <= word.length()) {
             for (auto &it: current_state->m_table) {
                 // it.first -> transition character
                 if (it.first == word[current_index]) {
@@ -32,7 +33,6 @@ bool LambdaNFA::solve(std::string&word){
                     // add all the next states to the stack
                     for (auto &next_state: it.second) {
                         states_to_visit.emplace(next_state, current_index + 1);
-                        index_to_state[next_state] = current_index + 1;
                     }
                 } else if (!(it.first >= 'a' && it.first <= 'z')) { // if we have lambda (this branch will be ignored in a DFA or a simple NFA!)
                     // add all the next states to the stack
@@ -41,7 +41,6 @@ bool LambdaNFA::solve(std::string&word){
                         // check for lambda cycles
                         if (!(iterator != index_to_state.end() && index_to_state[next_state] == current_index)) {
                             states_to_visit.emplace(next_state, current_index);
-                            index_to_state[next_state] = current_index;
                         }
                     }
                 }
