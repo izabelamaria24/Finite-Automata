@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(Tema_LFA
         Lambda-NFA.cpp
         State.cpp
-        headers/Lamda-NFA.h
+        headers/Lambda-NFA.h
         headers/State.h
         headers/State.h
         main.cpp)

@@ -10,15 +10,12 @@
 
 class LambdaNFA{
 private:
-    State* m_initial_state;
+    std::shared_ptr<State> m_initial_state;
     std::unordered_map<size_t, size_t>m_cycle;
-    std::vector<State*> m_states;
+    std::vector<std::shared_ptr<State>> m_states;
 
 public:
-    LambdaNFA(State* input_initial_state, std::vector<State*>&input_states);
+    LambdaNFA(std::shared_ptr<State> input_initial_state, std::vector<std::shared_ptr<State>>&input_states);
 
     bool solve(std::string&word);
-
-    // debugging
-//    void print();
 };
