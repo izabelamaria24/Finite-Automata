@@ -1,4 +1,7 @@
 #pragma once
+
+#include "State.h"
+
 #include <iostream>
 #include <fstream>
 #include "State.h"
