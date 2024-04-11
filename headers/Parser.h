@@ -28,10 +28,10 @@ private:
 
     Node* parseUnion();
 
-    Node* parse();
-
 public:
     explicit Parser(std::string inputRegEx) : regex(std::move(inputRegEx)), index(0) {}
+
+    Node* parse();
 
     LambdaNFA convertRegexToNFA();
 };
