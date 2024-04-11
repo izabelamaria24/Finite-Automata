@@ -9,4 +9,6 @@ add_executable(Tema_LFA
         headers/Lambda-NFA.h
         headers/State.h
         headers/State.h
-        main.cpp)
+        main.cpp
+        headers/Parser.h
+        Parser.cpp)

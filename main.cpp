@@ -1,4 +1,4 @@
-#include "headers/Lambda-NFA.h"
+#include "headers/Parser.h"
 
 void readInput() {
     std::ifstream inputFile("input.txt");
@@ -62,6 +62,11 @@ void readInput() {
 }
 
 int main() {
-    readInput();
+//    readInput();
+    std::string regex = "a.b.c";
+
+    Parser parser(regex);
+    LambdaNFA automata = parser.convertRegexToNFA();
+
     return 0;
 }

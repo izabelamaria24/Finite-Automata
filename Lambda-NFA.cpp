@@ -62,3 +62,19 @@ bool LambdaNFA::solve(std::string&word){
 
     return false;
 }
+
+void LambdaNFA::changeInitialState(std::shared_ptr<State> newInitialState) {
+    m_initial_state = newInitialState;
+}
+
+std::vector<std::shared_ptr<State>>& LambdaNFA::getStates(){
+    return m_states;
+}
+
+std::shared_ptr<State> LambdaNFA::getInitialState() {
+    return m_initial_state;
+}
+
+void LambdaNFA::addState(std::shared_ptr<State>newState) {
+    m_states.emplace_back(newState);
+}

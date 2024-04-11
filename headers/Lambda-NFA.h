@@ -18,4 +18,12 @@ public:
     LambdaNFA(std::shared_ptr<State> input_initial_state, std::vector<std::shared_ptr<State>>&input_states);
 
     bool solve(std::string&word);
+
+    void changeInitialState(std::shared_ptr<State>newInitialState);
+
+    std::vector<std::shared_ptr<State>>& getStates();
+
+    std::shared_ptr<State> getInitialState();
+
+    void addState(std::shared_ptr<State>newState);
 };

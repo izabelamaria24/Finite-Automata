@@ -12,3 +12,11 @@ void State::addToTable(char l, std::shared_ptr<State>&state) {
 void State::markFinal() {
     is_final = true;
 }
+
+void State::markNonFinal() {
+    is_final = false;
+}
+
+bool State::isFinal() const {
+    return is_final;
+}
