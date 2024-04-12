@@ -29,4 +29,6 @@ public:
     std::shared_ptr<State> getInitialState();
 
     void addState(std::shared_ptr<State>newState);
+
+    void convertNFAtoDFA();
 };

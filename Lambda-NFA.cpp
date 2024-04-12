@@ -78,3 +78,44 @@ std::shared_ptr<State> LambdaNFA::getInitialState() {
 void LambdaNFA::addState(std::shared_ptr<State>newState) {
     m_states.emplace_back(newState);
 }
+
+void LambdaNFA::convertNFAtoDFA() {
+    std::stack<std::shared_ptr<State>>states;
+    std::set<std::shared_ptr<State>>markStates;
+
+    states.push(this->m_initial_state);
+
+    markStates.insert(this->m_initial_state);
+
+    while (!states.empty()) {
+        std::shared_ptr<State>currentState = states.top();
+        states.pop();
+
+        for (int ch = 'a'; ch <= 'z'; ch++) {
+            std::shared_ptr<State>mergedState = std::make_shared<State>(std::unordered_map<char, std::vector<std::shared_ptr<State>>>());
+
+            if (currentState->m_table[ch].size() > 1) {
+                for (auto& state : currentState->m_table[ch]) {
+                    // table for each state
+
+                    if (state->isFinal()) mergedState->markFinal();
+
+                    for (auto it = state->m_table.begin(); it != state->m_table.end(); it++)
+                    {
+                        for (auto& s : state->m_table[it->first])
+                            mergedState->addToTable(it->first, s);
+                    }
+                }
+
+                currentState->m_table[ch] = std::vector<std::shared_ptr<State>>{mergedState};
+            } else mergedState = currentState->m_table[ch][0];
+
+
+            // if mergeState has not been added yet
+            if (markStates.find(mergedState) == markStates.end()) {
+                states.push(mergedState);
+                markStates.insert(mergedState);
+            }
+        }
+    }
+}
