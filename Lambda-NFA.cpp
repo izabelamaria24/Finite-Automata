@@ -42,7 +42,7 @@ bool LambdaNFA::solve(std::string&word){
                     for (auto &next_state: it.second)
                         states_to_visit.emplace(next_state, current_index + 1);
 
-                } else if (!(it.first >= 'a' && it.first <= 'z')) { // if we have lambda (this branch will be ignored in a DFA or a simple NFA!)
+                } else if (!(it.first >= "a" && it.first <= "z")) { // if we have lambda (this branch will be ignored in a DFA or a simple NFA!)
 
                     // add all the next states to the stack
                     for (auto &next_state: it.second) {
@@ -91,8 +91,8 @@ void LambdaNFA::convertNFAtoDFA() {
         std::shared_ptr<State>currentState = states.top();
         states.pop();
 
-        for (int ch = 'a'; ch <= 'z'; ch++) {
-            std::shared_ptr<State>mergedState = std::make_shared<State>(std::unordered_map<char, std::vector<std::shared_ptr<State>>>());
+        for (std::string ch = "a"; ch <= "z"; ch++) {
+            std::shared_ptr<State>mergedState = std::make_shared<State>(std::unordered_map<std::string, std::vector<std::shared_ptr<State>>>());
 
             if (currentState->m_table[ch].size() > 1) {
                 for (auto& state : currentState->m_table[ch]) {

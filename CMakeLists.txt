@@ -11,4 +11,8 @@ add_executable(Tema_LFA
         headers/State.h
         main.cpp
         headers/Parser.h
-        Parser.cpp)
+        Parser.cpp
+        headers/PushdownState.h
+        headers/Pushdown.h
+        Pushdown.cpp
+        PushdownState.cpp)

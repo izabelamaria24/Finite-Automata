@@ -1,4 +1,4 @@
-ToolSet: w64 6.0 (local)@D:\new folder\mingw32
+ToolSet: w64 11.0 (local)@D:\CLion 2023.2.2\bin\mingw
 Options: 
 
 Options:
