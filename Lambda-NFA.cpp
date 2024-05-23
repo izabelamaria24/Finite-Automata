@@ -35,7 +35,7 @@ bool LambdaNFA::solve(std::string&word){
         if (current_index <= word.length()) {
             for (auto &it: current_state->m_table) {
                 // it.first -> transition character (we check if it corresponds to the current character to be processed / it is lambda)
-                if (it.first == word[current_index]) {
+                if (it.first[0] == word[current_index]) {
                     // a non-lambda state will consume a character
 
                     // add all the next states to the stack
@@ -91,7 +91,8 @@ void LambdaNFA::convertNFAtoDFA() {
         std::shared_ptr<State>currentState = states.top();
         states.pop();
 
-        for (std::string ch = "a"; ch <= "z"; ch++) {
+        for (char c = 'a'; c <= 'z'; c++) {
+            std::string ch(c, 1);
             std::shared_ptr<State>mergedState = std::make_shared<State>(std::unordered_map<std::string, std::vector<std::shared_ptr<State>>>());
 
             if (currentState->m_table[ch].size() > 1) {

@@ -1,5 +1,6 @@
 #include "headers/Parser.h"
 #include "headers/Pushdown.h"
+#include "headers/CYK.h"
 
 void readInput() {
     std::ifstream inputFile("input.txt");
@@ -123,8 +124,19 @@ void readPDAInput() {
     }
 };
 
+void readCYK() {
+    CYK cyk;
+    cyk.readGrammar();
+    vector<string>inputs = {"abcd"};
+    for (const auto& input: inputs) {
+        if (cyk.cyk(input)) cout << "WORD " << input << " ACCEPTED!\n";
+        else cout << "WORD " << input << " REJECTED!\n";
+    }
+}
+
 int main() {
-    readPDAInput();
+    readCYK();
+//    readPDAInput();
 //    std::string regex = "a.b.c";
 //
 //    Parser parser(regex);

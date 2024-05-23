@@ -60,7 +60,7 @@ LambdaNFA computeConcat(LambdaNFA nfa1, LambdaNFA nfa2) {
 
     for (auto& state: states1) {
         if (state->isFinal()) {
-            state->addToTable('.', init2);
+            state->addToTable(".", init2);
             state->markNonFinal();
         }
         mergedStates.emplace_back(state);
@@ -79,9 +79,9 @@ LambdaNFA computeUnion(LambdaNFA nfa1, LambdaNFA nfa2) {
     std::shared_ptr<State> init1 = nfa1.getInitialState();
     std::shared_ptr<State> init2 = nfa2.getInitialState();
 
-    std::shared_ptr<State>startState = std::make_shared<State>(std::unordered_map<char, std::vector<std::shared_ptr<State>>>());
-    startState->addToTable('.', init1);
-    startState->addToTable('.', init2);
+    std::shared_ptr<State>startState = std::make_shared<State>(std::unordered_map<std::string, std::vector<std::shared_ptr<State>>>());
+    startState->addToTable(".", init1);
+    startState->addToTable(".", init2);
 
     mergedStates.emplace_back(startState);
     for (const auto& state: states1) mergedStates.emplace_back(state);
@@ -91,27 +91,28 @@ LambdaNFA computeUnion(LambdaNFA nfa1, LambdaNFA nfa2) {
 }
 
 LambdaNFA computeStar(LambdaNFA nfa) {
-    std::shared_ptr<State>startState = std::make_shared<State>(std::unordered_map<char, std::vector<std::shared_ptr<State>>>());
+    std::shared_ptr<State>startState = std::make_shared<State>(std::unordered_map<std::string, std::vector<std::shared_ptr<State>>>());
     startState->markFinal();
 
     std::shared_ptr<State> init = nfa.getInitialState();
-    startState->addToTable('.', init);
+    startState->addToTable(".", init);
 
     nfa.addState(startState);
 
     std::vector<std::shared_ptr<State>>states = nfa.getStates();
     for (auto& state: states) {
         if (state->isFinal())
-            state->addToTable('.', init);
+            state->addToTable(".", init);
     }
 
     return nfa;
 }
 
 LambdaNFA computeCharNFA(char tag) {
-    std::shared_ptr<State> initialState = std::make_shared<State>(std::unordered_map<char, std::vector<std::shared_ptr<State>>>());
-    std::shared_ptr<State> finalState = std::make_shared<State>(std::unordered_map<char, std::vector<std::shared_ptr<State>>>());
-    initialState->addToTable(tag, finalState);
+    std::shared_ptr<State> initialState = std::make_shared<State>(std::unordered_map<std::string, std::vector<std::shared_ptr<State>>>());
+    std::shared_ptr<State> finalState = std::make_shared<State>(std::unordered_map<std::string, std::vector<std::shared_ptr<State>>>());
+    std::string strTag(1, tag);
+    initialState->addToTable(strTag, finalState);
     finalState->markFinal();
 
     std::vector<std::shared_ptr<State>>states;
