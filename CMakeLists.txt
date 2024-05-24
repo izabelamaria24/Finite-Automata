@@ -17,4 +17,6 @@ add_executable(Tema_LFA
         Pushdown.cpp
         PushdownState.cpp
         headers/CYK.h
-        CYK.cpp)
+        CYK.cpp
+        headers/Transducer.h
+        Transducer.cpp)

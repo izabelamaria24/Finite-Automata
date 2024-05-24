@@ -22,4 +22,5 @@ public:
 
     friend class LambdaNFA;
     friend class Pushdown;
+    friend class Transducer;
 };

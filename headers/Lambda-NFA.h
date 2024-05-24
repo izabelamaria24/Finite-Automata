@@ -12,7 +12,7 @@
 #include <vector>
 
 class LambdaNFA{
-private:
+protected:
     std::shared_ptr<State> m_initial_state;
     std::unordered_map<size_t, size_t>m_cycle;
     std::vector<std::shared_ptr<State>> m_states;
